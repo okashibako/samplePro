@@ -1,19 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
-import MapView, { Overlay } from 'react-native-maps';
-import {  Center, NativeBaseProvider, Container } from "native-base"
+import { StyleSheet, View } from 'react-native';
+import MapView from 'react-native-maps';
+import { Button } from "native-base"
 
 class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
-        <Button
-          onPress={() => this._handlePress()}
-          title="Press Me"
-        >
-        </Button>
+        <View style={styles.button} >
+          <Button onPress={() => console.log("hello world")}>PRIMARY</Button>
+        </View>
         <MapView
           initialRegion={{
             latitude: 34.78825,
@@ -35,11 +33,13 @@ const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "100%",
+    zIndex: 0,
   },
   button: {
+    zIndex: 10,
     elevation: Platform.OS === 'android' ? 10 : 0,
     position: 'absolute',
-    top: 160,
+    top: 40,
     right: 10,
   },
 });
