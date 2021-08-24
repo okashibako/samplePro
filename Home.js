@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { Marker} from 'react-native-maps';
 import { Button } from "native-base"
 
 function Home() {
@@ -13,7 +13,18 @@ function Home() {
       longitudeDelta: 0.0421,
     },
   );
-
+  const markerObj = [
+    {
+      title: "サガミ",
+      latlng: {latitude: 34.78825, longitude: 137.4324},
+      description: "和食レストラン",
+    },
+    {
+      title: "サイゼリヤ",
+      latlng: {latitude: 34.8725, longitude: 137.1024},
+      description: "イタリアンレストラン",
+    },
+  ]
   useEffect(() => {
     for(var i = 0; i < 3; i++){
       console.log(region)
@@ -28,7 +39,16 @@ function Home() {
       <MapView
         region={region}
         style={styles.map}
-      />
+      >
+      {markerObj.map((marker, index) => (
+        <Marker
+          key={index}
+          coordinate={marker.latlng}
+          title={marker.title}
+          description={marker.description}
+        />
+      ))}
+      </MapView>
     </View>
   );
 }
